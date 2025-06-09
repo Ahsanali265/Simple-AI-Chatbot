@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Travel Assistant Chat</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef2f7;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .chat-container {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    #chat-box {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      height: 350px;
+      overflow-y: auto;
+      background: #fafafa;
+      margin-bottom: 10px;
+    }
+
+    .message {
+      margin-bottom: 12px;
+      max-width: 75%;
+      padding: 10px 15px;
+      border-radius: 20px;
+      line-height: 1.4;
+      word-wrap: break-word;
+    }
+
+    .user {
+      align-self: flex-end;
+      background-color: #d0e8ff;
+      color: #0056b3;
+      border-bottom-right-radius: 0;
+    }
+
+    .assistant {
+      align-self: flex-start;
+      background-color: #e2f6d3;
+      color: #33691e;
+      border-bottom-left-radius: 0;
+    }
+
+    .input-area {
+      display: flex;
+      gap: 10px;
+    }
+
+    #input-msg {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    #send-btn {
+      background-color: #2196f3;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    #send-btn:hover {
+      background-color: #1976d2;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <h2>🌍 Travel Assistant</h2>
+    <div id="chat-box"></div>
+    <div class="input-area">
+      <input type="text" id="input-msg" placeholder="Ask your travel question..." />
+      <button id="send-btn">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById('chat-box');
+    const inputMsg = document.getElementById('input-msg');
+    const sendBtn = document.getElementById('send-btn');
+
+    function appendMessage(text, sender) {
+      const msgDiv = document.createElement('div');
+      msgDiv.classList.add('message', sender);
+      msgDiv.textContent = text;
+      chatBox.appendChild(msgDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    sendBtn.addEventListener('click', () => {
+      const message = inputMsg.value.trim();
+      if (!message) return;
+
+      appendMessage(message, 'user');
+      inputMsg.value = '';
+
+      fetch('/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ message })
+      })
+        .then(response => response.json())
+        .then(data => {
+          appendMessage(data.reply, 'assistant');
+        })
+        .catch(err => {
+          appendMessage('Error: Could not get response from server.', 'assistant');
+          console.error(err);
+        });
+    });
+
+    inputMsg.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        sendBtn.click();
+      }
+    });
+  </script>
+</body>
+</html>
