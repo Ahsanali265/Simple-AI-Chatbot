@@ -5,8 +5,7 @@ import os
 app = Flask(__name__)
 app.secret_key = "some_secret_key"  
 
-client = openai.OpenAI(api_key="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") 
-
+client = openai.OpenAI(api_key="YOUR API KEY")
 def ask_gpt(messages):
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
