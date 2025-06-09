@@ -1,16 +1,16 @@
-# Simple-Travel-Assistant-AI-Chatbot
+# Simple-Travel-Assistant-Chatbot
 
 A simple AI-powered chatbot that helps users with travel-related queries using OpenAI's. The bot remembers your previous questions during a session and gives more personalized travel advice.
 
 ##  Frontend Preview
 
-![Chatbot Screenshot]![image](https://github.com/user-attachments/assets/99af9f5e-77ae-47ef-993e-c937c2a9f8ef)
+![image](https://github.com/user-attachments/assets/99af9f5e-77ae-47ef-993e-c937c2a9f8ef)
  
 
 
 ---
 
-##  What It Does
+## What It Does
 
 This is a small and simple project that lets you:
 
@@ -21,14 +21,14 @@ This is a small and simple project that lets you:
 
 ---
 
-## 🧠 Conversational Memory
+## Conversational Memory
 
 The chatbot uses short-term memory to remember messages during the current session, which helps it maintain context for more relevant replies. This memory resets when the session ends or is refreshed, keeping it lightweight and private.
 
 To add long-term memory, you can store conversation history in a file or database like SQLite, MongoDB, or Firebase. This allows the chatbot to retain context across sessions for a more personalized experience.
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - Python
 - OpenAI API (GPT-3.5 Turbo)
