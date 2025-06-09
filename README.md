@@ -24,7 +24,6 @@ This is a small and simple project that lets you:
 ## Conversational Memory
 
 The chatbot uses short-term memory to remember messages during the current session, which helps it maintain context for more relevant replies. This memory resets when the session ends or is refreshed, keeping it lightweight and private.
-
 To add long-term memory, you can store conversation history in a file or database like SQLite, MongoDB, or Firebase. This allows the chatbot to retain context across sessions for a more personalized experience.
 ---
 
